@@ -60,7 +60,7 @@ class mongodb inherits mongodb::params {
 		$mongod_auth = 'false',
 		$mongod_useauth = 'false',
 		$mongod_monit = false,
-		$mongod_add_options = ''
+		$mongod_add_options = [],
 	) {
 		file {
 			"/etc/mongod_${mongod_instance}.conf":

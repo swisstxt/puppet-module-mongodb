@@ -125,7 +125,7 @@ class mongodb inherits mongodb::params {
 		$mongos_running = 'true',
 		$mongos_logappend = 'true',
 		$mongos_fork = 'true',
-		$mongos_add_options = ''
+		$mongos_add_options = [],
 	) {
 		file {
 			"/etc/mongos_${mongos_instance}.conf":

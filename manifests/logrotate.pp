@@ -8,7 +8,7 @@ class mongodb::logrotate {
 	anchor { 'mongodb::logrotate::begin': }
 	anchor { 'mongodb::logrotate::end': }
 
-        include logrotate
+	include ::logrotate
 
 	file {
 		'/etc/logrotate.d/mongodb':

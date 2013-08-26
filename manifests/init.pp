@@ -22,8 +22,7 @@ class mongodb inherits mongodb::params {
 		}
 	}
 
-	# stop and disable default mongod
-
+	# stop default mongod
 	service {
 		"${::mongodb::params::old_servicename}":
 			ensure => stopped,
@@ -33,17 +32,6 @@ class mongodb inherits mongodb::params {
 			require => Anchor['mongodb::install::end'],
 			before => Anchor['mongodb::end'],
 	}
-
-	# remove not wanted startup script, because it would kill all mongod instances
-	# and not only the default mongod
-
-	file {
-		"/etc/init.d/${::mongodb::params::old_servicename}":
-			ensure => absent,
-			require => Service["${::mongodb::params::old_servicename}"],
-			before => Anchor['mongodb::end'],
-	}
-
 
 	define mongod (
 		$mongod_instance = $name,
@@ -56,7 +44,7 @@ class mongodb inherits mongodb::params {
 		$mongod_shardsvr = 'false',
 		$mongod_logappend = 'true',
 		$mongod_rest = 'true',
-		$mongod_fork = 'true',
+		$mongod_fork = 'false',
 		$mongod_auth = 'false',
 		$mongod_useauth = 'false',
 		$mongod_monit = false,
